@@ -4,6 +4,8 @@ const cookieParser = require("cookie-parser");
 const { urlencoded } = require("express");
 const { registerRouter } = require("./routers/registerRouter");
 const { handleError } = require("./utils/handleErrors");
+const { loginRouter } = require("./routers/loginRouter");
+const { homeRouterUser } = require("./routers/homeRouterUser");
 
 const app = express();
 
@@ -14,7 +16,10 @@ app.use(
   }),
 );
 app.use(cookieParser());
+
 app.use("/register", registerRouter);
+app.use("/login", loginRouter);
+app.use("/homeUser", homeRouterUser);
 
 app.use(handleError);
 

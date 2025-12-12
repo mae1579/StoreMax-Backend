@@ -63,6 +63,19 @@ class UserRecord {
     );
     return result.length === 0 ? null : new UserRecord(result[0]);
   }
+  static async findById(id) {
+    const [result] = await pool.execute(
+      "SELECT * FROM `users` WHERE `id` = :id",
+      {
+        id: id,
+      },
+    );
+    return result.length === 0 ? null : new UserRecord(result[0]);
+  }
+  static async findAll() {
+    const [result] = await pool.execute("SELECT * FROM `users`");
+    return result.map((elem) => new UserRecord(elem));
+  }
 }
 
 module.exports = {
